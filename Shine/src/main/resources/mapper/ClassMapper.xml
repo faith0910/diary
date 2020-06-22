@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shine.mapper.ClassMapper" >
+  <resultMap id="BaseResultMap" type="com.shine.entity.Class" >
+    <id column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from class
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.shine.entity.Class" >
+    insert into class (cid, cname, teacher_id
+      )
+    values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{teacherId,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shine.entity.Class" >
+    update class
+    set cname = #{cname,jdbcType=VARCHAR},
+      teacher_id = #{teacherId,jdbcType=INTEGER}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getClass" parameterType="java.lang.Integer" resultMap="ClassResultMap">
+        select * from class c,teacher t,stu s where c.teacher_id = t.tid and c.cid = s.class_id and c.cid = #{id}
+  </select>
+  <resultMap id="ClassResultMap" type="com.shine.entity.Class">
+    <id property="cid" column="cid"/>
+    <result property="cname" column="cname"/>
+    <association property="teacher" column="teacher_id" javaType="com.shine.entity.Teacher">
+      <id property="tid" column="tid"></id>
+      <result property="age" column="age"></result>
+      <result property="sex" column="sex"></result>
+      <result property="tname" column="tname"></result>
+      <result property="address" column="address"></result>
+   </association>
+      <collection property="students" column="class_id" ofType="com.shine.entity.Stu">
+          <id property="sid" column="s_id"/>
+          <result property="sname" column="s_name"/>
+      </collection>
+
+
+  </resultMap>
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select cid, cname, teacher_id
+    from class
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select cid, cname, teacher_id
+    from class
+  </select>
+</mapper>
