@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--bean标签表示要创建的bean对象
+        id:bean的唯一标识，为了跟其他的bean区分
+        class:表示要创建的bean的完全限定名
+    -->
+   <!-- <bean id="person" class="com.xunan.bean.Person">
+        &lt;!&ndash;给属性赋值使用property标签
+        name:表示属性的名称
+        value：表示具体的属性值
+        &ndash;&gt;
+        <property name="id" value="1"></property>
+        <property name="name" value="许楠"></property>
+        <property name="age" value="24"></property>
+        <property name="gender" value="女"></property>
+    </bean>-->
+    <bean id="xunan" class="com.xunan.bean.Person" p:id="2" p:name="楠宝" p:age="24" p:gender="女"></bean>
+</beans>
