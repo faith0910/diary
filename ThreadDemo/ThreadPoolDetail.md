@@ -409,3 +409,8 @@ public ScheduledThreadPoolExecutor(int corePoolSize) { 
 ```
 
 我们通过源码可以看出，它采用的任务队列是 DelayedWorkQueue，这是一个延迟队列，同时也是一个无界队列，所以和 LinkedBlockingQueue 一样，如果队列中存放过的任务，就可能导致 OOM。
+
+##### 如何正确的关闭线程池？
+
+第一种是shutdown(),它可以安全地关闭一个线程池，调用shutdown()方法之后线程池并不是立刻就关闭，因为此时线程池中可能还有很多任务在执行，或是任务队列中有大量正在等待被执行的任务，调用shutdown()方法后
+
